@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -123,6 +125,13 @@ namespace CSharpLevel0.Json
 
         private static void ManageWithAttribute()
         {
+            ManageWithJsonObjectAttribute();
+            ManageWithJsonExtensionDataAttribute();
+            ManageWithJsonConstructorAttribute();
+        }
+
+        private static void ManageWithJsonObjectAttribute()
+        {
             var person = new Person()
             {
                 Name = "John Smith",
@@ -130,8 +139,46 @@ namespace CSharpLevel0.Json
                 LastModified = DateTime.Now,
                 Department = "DA"
             };
-            var output = JsonConvert.SerializeObject(person);
+            var person1 = new Person1()
+            {
+                Name = "John Smith",
+                BirthDate = new DateTime(2000, 12, 15),
+                LastModified = DateTime.Now,
+                Department = "DA"
+            };
+            var output = JsonConvert.SerializeObject(person1);
             Console.WriteLine(output);
+        }
+
+        private static void ManageWithJsonExtensionDataAttribute()
+        {
+            string json = @"{
+  'DisplayName': 'John Smith',
+  'SAMAccountName': 'contoso\\johns'
+}";
+
+            DirectoryAccount account = JsonConvert.DeserializeObject<DirectoryAccount>(json);
+
+            Console.WriteLine(account.DisplayName);
+            // John Smith
+
+            Console.WriteLine(account.Domain);
+            // contoso
+
+            Console.WriteLine(account.UserName);
+            // johns
+        }
+
+        private static void ManageWithJsonConstructorAttribute()
+        {
+            string json = @"{
+  ""UserName"": ""domain\\username"",
+  ""Enabled"": true
+}";
+
+            User user = JsonConvert.DeserializeObject<User>(json);
+
+            Console.WriteLine(user.UserName);
         }
 
         #endregion
@@ -167,7 +214,7 @@ namespace CSharpLevel0.Json
         }
     }
 
-    [JsonObject(MemberSerialization.OptIn)]
+    [JsonObject(MemberSerialization.OptIn/*只有标记JsonProperty的被序列化*/)]
     public class Person
     {
         // "John Smith"
@@ -184,5 +231,66 @@ namespace CSharpLevel0.Json
 
         // not serialized because mode is opt-in
         public string Department { get; set; }
+    }
+
+    public class Person1
+    {
+        // "John Smith"
+        public string Name { get; set; }
+
+        // "2000-12-15T22:11:03"
+        public DateTime BirthDate { get; set; }
+
+        // new Date(976918263055)
+        public DateTime LastModified { get; set; }
+
+        [JsonIgnore]
+        public string Department { get; set; }
+    }
+
+    public class DirectoryAccount
+    {
+        // normal deserialization
+        public string DisplayName { get; set; }
+
+        // these properties are set in OnDeserialized
+        public string UserName { get; set; }
+        public string Domain { get; set; }
+
+        [JsonExtensionData]
+        private IDictionary<string, JToken> _additionalData;
+
+        [OnDeserialized]//OnSerializing，OnSerialized,OnDeserializing，OnDeserialized
+        private void OnDeserialized(StreamingContext context)
+        {
+            // SAMAccountName is not deserialized to any property
+            // and so it is added to the extension data dictionary
+            string samAccountName = (string)_additionalData["SAMAccountName"];
+
+            Domain = samAccountName.Split('\\')[0];
+            UserName = samAccountName.Split('\\')[1];
+        }
+
+        public DirectoryAccount()
+        {
+            _additionalData = new Dictionary<string, JToken>();
+        }
+    }
+
+    public class User
+    {
+        public string UserName { get; private set; }
+        public bool Enabled { get; private set; }
+
+        public User()
+        {
+        }
+
+        [JsonConstructor]
+        public User(string userName, bool enabled)
+        {
+            UserName = userName;
+            Enabled = enabled;
+        }
     }
 }
