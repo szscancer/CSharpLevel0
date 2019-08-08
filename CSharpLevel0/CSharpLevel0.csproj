@@ -65,6 +65,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CSharpLevel0.Async\CSharpLevel0.Async.csproj">
+      <Project>{4f8ab79c-28cf-41bb-9ca5-b7b6f1790430}</Project>
+      <Name>CSharpLevel0.Async</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CSharpLevel0.Json\CSharpLevel0.Json.csproj">
       <Project>{ff7ee56e-5885-422e-b84a-bb84540f66b7}</Project>
       <Name>CSharpLevel0.Json</Name>

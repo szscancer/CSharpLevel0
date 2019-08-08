@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLevel0.String", "CSha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLevel0.DesignPattern", "CSharpLevel0.DesignPattern\CSharpLevel0.DesignPattern.csproj", "{B271EA71-6F0C-4C6F-9E1C-DD97F5321D51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLevel0.Async", "CSharpLevel0.Async\CSharpLevel0.Async.csproj", "{4F8AB79C-28CF-41BB-9CA5-B7B6F1790430}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLevel0.Communication", "CSharpLevel0.Communication\CSharpLevel0.Communication.csproj", "{044E98DF-18D5-4618-89ED-9A3A8154D4FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{B271EA71-6F0C-4C6F-9E1C-DD97F5321D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B271EA71-6F0C-4C6F-9E1C-DD97F5321D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B271EA71-6F0C-4C6F-9E1C-DD97F5321D51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F8AB79C-28CF-41BB-9CA5-B7B6F1790430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F8AB79C-28CF-41BB-9CA5-B7B6F1790430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F8AB79C-28CF-41BB-9CA5-B7B6F1790430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F8AB79C-28CF-41BB-9CA5-B7B6F1790430}.Release|Any CPU.Build.0 = Release|Any CPU
+		{044E98DF-18D5-4618-89ED-9A3A8154D4FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{044E98DF-18D5-4618-89ED-9A3A8154D4FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{044E98DF-18D5-4618-89ED-9A3A8154D4FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{044E98DF-18D5-4618-89ED-9A3A8154D4FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

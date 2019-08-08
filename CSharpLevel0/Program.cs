@@ -1,4 +1,5 @@
-﻿using CSharpLevel0.Json;
+﻿using CSharpLevel0.Async;
+using CSharpLevel0.Json;
 using CSharpLevel0.Log;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace CSharpLevel0
         static void Main(string[] args)
         {
             //Log();
-            Json();
+            //Json();
+            Task();
             Console.Read();
         }
 
@@ -25,6 +27,11 @@ namespace CSharpLevel0
         private static void Json()
         {
             JsonManager.Manage();
+        }
+
+        private static void Task()
+        {
+            TaskManager.Manage();
         }
     }
 }
