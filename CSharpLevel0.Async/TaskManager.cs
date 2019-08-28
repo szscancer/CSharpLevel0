@@ -16,7 +16,6 @@ namespace CSharpLevel0.Async
     /// </summary>
     public class TaskManager
     {
-
         public static void Manage()
         {
             //Create();
